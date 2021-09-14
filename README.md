@@ -1,4 +1,15 @@
-# Getting Started with Create React App
+# React HTTP Create, Read, Update, Delete Demo
+## in this demo we will learn how to connect with a backend API our React app
+Note: for this test we will use a Firebase Realtime Database, we can create one really quickly and easily in https://console.firebase.google.com/ creating a new project and selecting the *Realtime Database* option, click in create button and selecting the *test mode* option, with that we will have now a firebase backend that will be able to receive CRUD requests, for me the url is https://react-http-crud-default-rtdb.firebaseio.com/. 
+
+and now we just need to define a object model to use in our database, For this demo I create a CRUD for movies, based on this the URLs will be something like:
+
+[GET] https://react-http-crud-default-rtdb.firebaseio.com/movies.json `get all movies`
+[POST] https://react-http-crud-default-rtdb.firebaseio.com/movies.json `create a movies`
+[GET] https://react-http-crud-default-rtdb.firebaseio.com/movies/{movieID}.json `get an specific movies`
+[PUT] https://react-http-crud-default-rtdb.firebaseio.com/movies/{movieID}.json `update an specific movies`
+[DELETE] https://react-http-crud-default-rtdb.firebaseio.com/movies/{movieID}.json `delete an specific movies`
+# Getting Started with Create React App 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
