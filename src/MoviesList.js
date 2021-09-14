@@ -3,7 +3,7 @@ import MoviesListItem from './MoviesListItem';
 
 function MoviesList(props) {
   const [movies, setMovies] = useState([]);
-  const { refresh } = props;
+  const { refresh, editMovie } = props;
 
   const fetchMovies = async () => {
     const response = await fetch('https://react-http-crud-default-rtdb.firebaseio.com/movies.json');
@@ -35,7 +35,7 @@ function MoviesList(props) {
   let content = '';
   if (movies && movies.length) {
     content = movies.map(movie => {
-      return <MoviesListItem key={movie.id}  movie={movie} deleteMovie={deleteMovie} />
+      return <MoviesListItem key={movie.id}  movie={movie} deleteMovie={deleteMovie} editMovie={editMovie} />
     })
   }
 

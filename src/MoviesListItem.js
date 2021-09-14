@@ -1,9 +1,9 @@
 function MoviesListItem (props) {
-  const { movie, deleteMovie } = props;
+  const { movie, deleteMovie, editMovie } = props;
   return (
     <div className="MoviesListItem">
       <div className="MoviesListItem__header">
-        <button>edit</button>
+        <button onClick={()=>editMovie(movie)}>edit</button>
         <button onClick={()=>deleteMovie(movie.id)}>delete</button>
       </div>
       <div className="MoviesListItem__body">

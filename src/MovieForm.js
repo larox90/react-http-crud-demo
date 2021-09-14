@@ -1,7 +1,7 @@
 import { useRef } from "react";
 
 function MovieForm(props) {
-  const { onRefresh } = props;
+  const { onRefresh, movieToEdit, editMovie } = props;
   const titleRef = useRef();
   const summaryRef = useRef();
   const posterRef = useRef();
@@ -32,14 +32,21 @@ function MovieForm(props) {
       return false;
     }
     try {
-      const response = await fetch('https://react-http-crud-default-rtdb.firebaseio.com/movies.json', {
-        method: 'POST',
+      let fetchMethod = 'POST';
+      let fetchUrl = 'https://react-http-crud-default-rtdb.firebaseio.com/movies.json';
+      if (movieToEdit) {
+        fetchMethod = 'PUT';
+        fetchUrl = `https://react-http-crud-default-rtdb.firebaseio.com/movies/${movieToEdit.id}.json`;
+      }
+      const response = await fetch(fetchUrl, {
+        method: fetchMethod,
         body: JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json'
         }
       });
       const addedID = await response.json();
+      editMovie(null)
       onRefresh();
       console.log('addedID', addedID);
     } catch (error) {
@@ -47,6 +54,10 @@ function MovieForm(props) {
     }
     setFormData();
     console.log('data', data);
+  }
+
+  if (movieToEdit) {
+    setFormData(movieToEdit);
   }
 
   return (
@@ -64,7 +75,7 @@ function MovieForm(props) {
         <input type="text" id="title" name="name" ref={posterRef} />
       </label>
       <div>
-        <button type="submit">Create</button>
+        <button type="submit">{ movieToEdit ? 'Edit': 'Create' }</button>
       </div>
     </form>
   );
