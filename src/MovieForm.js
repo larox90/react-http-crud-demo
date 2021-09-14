@@ -1,6 +1,7 @@
 import { useRef } from "react";
 
-function MovieForm() {
+function MovieForm(props) {
+  const { onRefresh } = props;
   const titleRef = useRef();
   const summaryRef = useRef();
   const posterRef = useRef();
@@ -13,16 +14,23 @@ function MovieForm() {
     }
   }
 
-  const setFormData = (data) => {
+  const setFormData = (data = {}) => {
     const { title, summary, poster } = data;
     titleRef.current.value = title || '';
     summaryRef.current.value = summary || '';
     posterRef.current.value = poster || '';
   }
 
+  const validData = (data) => {
+    return data.title && data.summary && data.poster;
+  }
+
   const handleSubmitForm = async (event) => {
     event.preventDefault();
     const data = getFormData();
+    if (!validData(data)) {
+      return false;
+    }
     try {
       const response = await fetch('https://react-http-crud-default-rtdb.firebaseio.com/movies.json', {
         method: 'POST',
@@ -32,6 +40,7 @@ function MovieForm() {
         }
       });
       const addedID = await response.json();
+      onRefresh();
       console.log('addedID', addedID);
     } catch (error) {
       console.log('error', error);

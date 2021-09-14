@@ -36,9 +36,6 @@
 }
 
 .App .MoviesList .MoviesListItem {
-  display: flex;
-  flex-direction: row;
-  text-align: center;
   background-color: darkslategrey;
   color: white;
   padding: 20px;
@@ -50,7 +47,24 @@
   margin-bottom: 15px;
 }
 
-.App .MoviesList .MoviesListItem .MovieListItem__poster {
+.App .MoviesList .MoviesListItem .MoviesListItem__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  border-bottom: 1px solid rgba(218, 218, 218, 0.797);
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+
+.App .MoviesList .MoviesListItem .MoviesListItem__body {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+.App .MoviesList .MoviesListItem .MoviesListItem__body .MovieListItem__text {
+  width: 46%;
+}
+.App .MoviesList .MoviesListItem .MoviesListItem__body .MovieListItem__poster {
   width: 50%;
   background-repeat: no-repeat;
   background-size: cover;

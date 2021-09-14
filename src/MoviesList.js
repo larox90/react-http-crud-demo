@@ -4,18 +4,23 @@ export function MoviesListItem (props) {
   const { movie } = props;
   return (
     <div className="MoviesListItem">
-      <div className="MovieListItem__text">
-        <h2> { movie.title } </h2>
-        <p> { movie.summary } </p>
+      <div className="MoviesListItem__header">
+        <button>edit</button>
+        <button>delete</button>
       </div>
-      <div className="MovieListItem__poster" style={{ 'backgroundImage': `url("${movie.poster}")` }}>
-
+      <div className="MoviesListItem__body">
+        <div className="MovieListItem__text">
+          <h2> { movie.title } </h2>
+          <p> { movie.summary } </p>
+        </div>
+        <div className="MovieListItem__poster" style={{ 'backgroundImage': `url("${movie.poster}")` }} />
       </div>
     </div>
   );
 }
-function MoviesList() {
+function MoviesList(props) {
   const [movies, setMovies] = useState([]);
+  const { refresh } = props;
   useEffect(() => {
     async function fetchMovies() {
       const response = await fetch('https://react-http-crud-default-rtdb.firebaseio.com/movies.json');
@@ -29,11 +34,11 @@ function MoviesList() {
           title: data[key].title
         });
       }
-
+      formattedMovies.reverse();
       setMovies(formattedMovies);
     }
     fetchMovies();
-  }, []);
+  }, [refresh]);
   let content = '';
   if (movies && movies.length) {
     content = movies.map(movie => {
